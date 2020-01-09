@@ -1,0 +1,39 @@
+@charset "EUC-KR";
+
+.header {
+	width: 1000px;
+	min-width: 1000px;
+}
+
+.test {
+	display: inline-table;
+}
+
+.header ul {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	list-style: none;
+	text-align: center;
+}
+
+.header ul li:first-child {
+	padding-left: 20px
+}
+
+.header ul li {
+	display: table-cell;
+	padding-right: 60px;
+	font-size: 13pt;
+	vertical-align: middle;
+	font-family: 'Nanum Myeongjo', serif;
+	text-align: center;
+}
+
+.header ul li a {
+	text-decoration: none;
+	color: black;
+}
+
+.header a {
+	text-decoration: none;
+}

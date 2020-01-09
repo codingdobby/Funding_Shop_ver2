@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Upload.xml">
+	<select id="getAll" parameterType="String" resultType="UploadVO">
+		select
+		p.project_num,p.ptitle,m.nickname,p.regdate,p.pVerify 
+		from project p, member m
+		WHERE p.id_fk=#{id_fk}
+		AND p.id_fk = m.id
+		order by p.regdate DESC;
+	</select>
+
+
+	<insert id="insertProj" parameterType="java.util.Map">
+		INSERT INTO project (ptitle, pcontent,totMoney, id_fk, pdate,
+		pCategory, ppic1, pDetail_img) VALUES
+		<foreach collection="list" item="item" separator=" , ">
+			('${item.ptitle}','${item.pcontent}','${item.totMoney}','${item.id_fk}',
+			'${item.pdate}', '${item.pCategory}', '${item.ppic1}',
+			'${item.pDetail_img}')
+		</foreach>
+	</insert>
+
+	<insert id="insertRew" parameterType="java.util.Map">
+		insert into reward(project_num_fk,prodName, prodPrice, prodCount)
+		values
+		<foreach collection="reward" item="item" separator=" , ">
+			('${item.project_num_fk}','${item.prodName}','${item.prodPrice}','${item.prodCount}')
+		</foreach>
+	</insert>
+	<select id="getProject_num_fk" parameterType="String"
+		resultType="int">
+		select project_num from project where ptitle=#{ptitle}
+	</select>
+
+</mapper>
+
+

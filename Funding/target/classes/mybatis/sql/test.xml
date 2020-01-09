@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.mybatis-config.xml">
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="uc.ac.vo.MemberVO">
+		insert into member
+		(nickname, id,
+		pwd, phone, address)
+		values(#{nickname},#{id},#{pwd},#{phone},#{address})
+
+	</insert>
+
+	<!-- 회원인지 확인 -->
+	<select id="checkMember" resultType="uc.ac.vo.MemberVO"
+		parameterType="hashMap">
+
+		select * from member where id=#{id} and pwd=#{pwd}
+
+
+	</select>
+
+	<!-- 로그인 체크 -->
+	<select id="loginCheck" resultType="boolean"
+		parameterType="hashMap">
+
+		select * from member where id=#{id} and pwd=#{pwd}
+
+
+	</select>
+
+	<!-- 회원 정보 모두 가져오기 -->
+	<select id="getAll" resultType="uc.ac.vo.MemberVO">
+
+		select * from member
+
+
+	</select>
+	
+	<!-- verify값 가져오기 -->
+	
+		<select id="getVerify" resultType="uc.ac.vo.MemberVO">
+
+		select * from member
+
+
+	</select>
+
+	<!-- 탈퇴 -->
+	<delete id="delete" parameterType="String">
+	
+	delete from member where id=#{id}
+	
+	</delete>
+
+	<!-- 아이디로 회원 체크 -->
+	<select id="checkID" parameterType="String" resultType="String">
+		select id from member where id=#{id}
+	</select>
+
+	<!-- 마이페이지에서 정보 수정-->
+	<update id="updateInfo" parameterType="String">
+	update member set nickname=#{nickname}, pwd=#{pwd}
+	,phone=#{phone}, address=#{address} where id=#{id}
+	</update>
+	
+	<!-- 비밀번호 재설정 -->
+	<update id="updatePwd" parameterType="hashmap">
+	update member set pwd=#{pwd} where id=#{checkid}
+	</update>
+	<!-- 카트 -->
+	<select id="getCart" parameterType="String">
+	select c.id_fk, r.prodName, p.ptitle,count(amount) amount ,r.prodPrice*count(amount) price from cart c,project p, reward r where c.id_fk=#{c.id_fk} and p.project_num=c.project_num_fk
+	and c.prodNum_fk=r.prodNum group by c.project_num_fk
+	
+	</select>
+	
+
+</mapper>
+
+

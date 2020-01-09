@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+body {
+	position: relative;
+	min-height: 100%;
+	margin: 0;
+	height:auto;
+	
+}
+
+.swiper-container {
+	
+	width: 100%;
+	height: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.swiper-slide {
+		z-index:-1;
+		border:1px solid black;
+	background-size: cover;
+	background-position: center;
+}
+
+.swiper-slide img {
+	width: 100%;
+	height: 100%;
+}
+
+.gallery-top {
+	height: 400px;
+	width: 100%;
+}
+
+.gallery-thumbs {
+	height: 20%;
+	box-sizing: border-box;
+	padding: 10px 0;
+}
+
+.gallery-thumbs .swiper-slide {
+	width: 50px;
+	height: 80px;
+	opacity: 0.4;
+}
+
+.gallery-thumbs .swiper-slide-thumb-active {
+	opacity: 1;
+}
+
+/****************/
+.section1 {
+	width: 1300px;
+	border: 1px solid black;
+}
+
+.fund_each {
+	width: 1200px;
+	text-align: left;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	margin: 10px;
+	margin-bottom: 50px;
+}
+
+.fund_each a {
+	text-decoration: none;
+}
+
+.fund_each img {
+	margin-top: 10px;
+	width: 280px;
+	height: 300px;
+}
+
+.fund_each td {
+	font-size: 13pt;
+	border: 0px;
+	font-family: 'Nanum Gothic', sans-serif;
+	line-height: 40px;
+	padding-left: 10px;
+}
+
+.fund_each table {
+	margin: 10px;
+	border-collapse: collapse;
+}
+
+.fund_img {
+	width: 300px;
+	height: 200px;
+}
+
+.fund_img img {
+	width: 300px;
+	height: 200px;
+}
+
+.fund-title {
+	width: 300px;
+	height: 80px;
+	text-align: center;
+}
+
+.fund-date {
+	width: 300px;
+	height: 80px;
+	border: 1px solid blue;
+}
+
+#text {
+font-size: 10pt;
+color: blue;
+	
+}
+#big_text {
+	font-size: 11pt;
+	
+	
+}

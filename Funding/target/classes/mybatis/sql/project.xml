@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.project.xml">
+	<!-- 상품 다 가져오기 -->
+	<select id="getAll" resultType="ProjectVO">
+		select
+		p.project_num,p.ptitle,m.nickname,p.pdate,p.pVerify,p.ppic1,p.totMoney
+		from project p, member m
+		where id_fk=id and pVerify=1
+		order by p.regdate
+		desc
+	</select>
+
+
+	<select id="getNewProject" resultType="ProjectVO">
+		select
+		p.project_num,p.ptitle,m.nickname,p.pdate,p.pVerify,p.ppic1,p.totMoney
+		, p.regdate
+		from project p, member m
+		where id_fk=id and pVerify=1
+		AND p.regdate BETWEEN DATE_ADD(NOW(),INTERVAL -1 WEEK ) AND NOW()
+		order by
+		p.regdate
+		desc
+	</select>
+	<select id="getPopularProject" resultType="ProjectVO">
+		select
+		p.project_num,p.ptitle,m.nickname,p.pdate,p.pVerify,p.ppic1,p.totMoney
+		, p.regdate
+		from project p, member m
+		where id_fk=id and pVerify=1
+		order BY p.phit
+		desc
+	</select>
+
+
+	<select id="getContent" parameterType="Integer"
+		resultType="ProjectVO">
+		select p.project_num, p.ptitle, m.nickname,
+		p.pcontent,p.pmoney,p.pdate,p.ppic1,p.totMoney
+		from project p , member
+		m
+		where
+		p.id_fk = m.id and
+		p.project_num=#{project_num};
+	</select>
+
+	<select id="getProd" parameterType="Integer" resultType="ProdVO">
+		select
+		prodCount,prodName,prodNum
+		from reward
+		where
+		project_num_fk=#{project_num_fk}
+	</select>
+
+	<!-- 상품 클릭할 때마다 조회수 +1 -->
+	<update id="phitUpdate" parameterType="Integer">
+		update project set
+		phit=phit+1 where project_num=#{project_num}
+
+	</update>
+
+	<!-- 인기 상품 4개 가져오기 -->
+	<select id="getHitItem" resultType="ProjectVO">
+		select * from project where
+		pVerify=1 order by phit desc limit 4
+	</select>
+
+	<!-- 최신 상품 4개 가져오기 -->
+	<select id="getNewItem" resultType="ProjectVO">
+		select * from project where
+		pVerify=1 order by regdate desc limit 4
+	</select>
+
+	<!-- 장바구니 추가하기 세션 구현 성공할 때 삭제 예정 -->
+
+	<insert id="addCart" parameterType="HashMap">
+		insert into
+		cart(id_fk,project_num_fk,prodNum_fk,amount)
+		values(#{id_fk},#{project_num_fk},#{prodNum_fk},1)
+	</insert>
+
+	<!-- 장바구니 이동시 -1 -->
+	<update id="minusProduct" parameterType="Integer">
+		update reward set
+		prodCount=prodCount-1 where prodNum=#{prodNum}
+	</update>
+
+	<!-- 장바구니 이동시 돈 더하기 -->
+	<update id="plusMoney" parameterType="Integer">
+		update project p , reward r
+		set p.pmoney=p.pmoney+r.prodPrice
+		where r.project_num_fk=p.project_num
+		and p.project_num=#{projectNum}
+	</update>
+
+	<!--프로젝트 검색 -->
+
+	<select id="search" parameterType="String"
+		resultType="ProjectVO">
+		select * from project where pVerify=1 and ptitle=#{ptitle}
+		order by regdate
+		desc
+	</select>
+
+</mapper>
+
+

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mybatis.Notice.xml">
+	<!-- 상품 다 가져오기 -->
+	<select id="getAll" resultType="NoticeVO">
+
+		select * from notice order by notice_num desc
+	</select>
+
+	<select id="getContent" parameterType="Integer"
+		resultType="NoticeVO">
+		select * from notice where notice_num=#{notice_num}
+	</select>
+	<!-- 조회수 업데이트 -->
+	<update id="hitUpdate" parameterType="Integer">
+		update notice set nhits=nhits+1 where notice_num=#{notice_num}
+	</update>
+	<!-- 공지 작성 -->
+	<insert id="noticeInsert" parameterType="HashMap">
+		insert into notice(nTitle, nContent, nWriter)
+		values (#{nTitle},#{nContent},#{nWriter})
+	</insert>
+
+	<select id="cnt" resultType="int">
+		SELECT COUNT(*) FROM notice;
+	</select>
+	
+	<select id="listPage" parameterType="hashMap"
+		resultType="NoticeVO">
+		select
+		*
+		from notice
+		order by notice_num desc
+		limit #{displayPost},#{postNum}
+	</select>
+	
+	<delete id="noticeDelete" parameterType="Integer">
+	delete from notice where notice_num=#{num}
+	</delete>
+</mapper>
+
+
