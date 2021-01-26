@@ -1,12 +1,8 @@
 package uc.ac.funding;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,66 +10,65 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import uc.ac.db.MemberDAO;
 import uc.ac.db.UploadDAO;
+import uc.ac.service.MemberService;
+import uc.ac.service.ProjectService;
+import uc.ac.service.UploadService;
 import uc.ac.vo.MemberVO;
-import uc.ac.vo.ProjectVO;
 import uc.ac.vo.UploadVO;
 
-/**
- * Handles requests for the application home page.
- */
 @Controller
 public class AdminController {
 	@Autowired
-	private UploadDAO uploadDAO;
+	private UploadService uploadService;
+
+	@Autowired
+	private MemberService memberService;
+
+	@Autowired
+	private ProjectService projectService;
 
 	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
 	@RequestMapping("/Admin")
-	public String Admin(HttpServletRequest request, Model model) {// id,pwd확인
-		MemberDAO memberDAO = new MemberDAO();
-		ArrayList<MemberVO> memBotari = memberDAO.getAll();
+	public String Admin(Model model) {
 
-		model.addAttribute("MemberList", memBotari);
+		List<MemberVO> memberList = memberService.getAll();
+
+		model.addAttribute("MemberList", memberList);
 
 		return "/Admin/adminMain";
 	}
 
 	@RequestMapping("/delete")
-	public String delete(HttpServletRequest request, Model model) {// id,pwd확인
-		MemberDAO memDAO = new MemberDAO();
+	public String delete(HttpServletRequest request, Model model) {
 
 		String id = request.getParameter("id");
 
-		memDAO.delete(id);
+		memberService.delete(id);
 
 		return "redirect:Admin";
 	}
 
 	@RequestMapping("/AdminProject")
-	public String AdminProject(HttpServletRequest request, Model model) {// id,pwd확인
+	public String AdminProject(Model model) {
 
-		ArrayList<UploadVO> ProjectBotari = uploadDAO.projectALL();
+		List<UploadVO> ProjectBotari = uploadService.projectALL();
 
 		model.addAttribute("ProjectList", ProjectBotari);
 
 		return "Admin/AdminProject";
 	}
 
-	/************************* 버튼으로 승인하는 기능 *************************************/
+	// 관리자가 승인하는 기능
 	@RequestMapping("/admit")
-	public String admit(HttpServletRequest request, Model model) {// id,pwd확인
-		UploadDAO upDAO = new UploadDAO();
+	public String admit(HttpServletRequest request) {
 
-		String pnum = request.getParameter("pnum");
+		String project_num = request.getParameter("pnum");
 
-		upDAO.admit(pnum);
+		projectService.admit(project_num);
 
 		return "redirect:AdminProject";
 	}

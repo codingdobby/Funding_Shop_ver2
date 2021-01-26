@@ -13,64 +13,64 @@ import uc.ac.vo.MemberVO;
 public class MemberServiceImp implements MemberService {
 
 	@Autowired
-	MemberDAO dao;
+	MemberDAO memberDAO;
 
 	@Override
 	public void join(MemberVO vo) {
-		dao.join(vo);
+		memberDAO.join(vo);
 
 	}
 
 	@Override
 	public MemberVO checkMember(String id, String pwd) {
 
-		return dao.checkMember(id, pwd);
+		return memberDAO.checkMember(id, pwd);
 	}
 
 	@Override
 	public boolean loginCheck(String id, String pwd) {
-		return dao.loginCheck(id, pwd);
+		return memberDAO.loginCheck(id, pwd);
 	}
 
 	@Override
 	public List<MemberVO> getAll() {
-		return dao.getAll();
+		return memberDAO.getAll();
 		
 	}
 
 	@Override
 	public List<MemberVO> getVerify() {
-		return dao.getVerify();
+		return memberDAO.getVerify();
 	}
 
 	@Override
 	public void delete(String id) {
-	dao.delete(id);
+		memberDAO.delete(id);
 
 	}
 
 	@Override
-	public String checkID(String checkid) {
-		return dao.checkID(checkid);
+	public String checkID(String checkId) {
+		return memberDAO.checkID(checkId);
 	
 	}
 
 	@Override
 	public void updateInfo(String nickname, String pwd, String phone, String address, String id) {
-		dao.updateInfo(nickname, pwd, phone, address, id);
+		memberDAO.updateInfo(nickname, pwd, phone, address, id);
 
 	}
 
 	@Override
-	public void updatePwd(String pwd, String checkid) {
-		dao.updatePwd(pwd, checkid);
+	public void updatePwd(String pwd, String checkId) {
+		memberDAO.updatePwd(pwd, checkId);
 
 	}
 
 	@Override
 	public List<CartVO> getCart(String id_fk) {
 		
-		return dao.getCart(id_fk);
+		return memberDAO.getCart(id_fk);
 	}
 
 }

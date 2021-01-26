@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +16,7 @@
 }
 </style>
 
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/project.css"
 	type="text/css">
@@ -26,6 +24,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Nanum+Gothic|Nanum+Myeongjo&display=swap"
 	rel="stylesheet">
+
 <meta charset="UTF-8">
 <title>프로젝트 후원 메인</title>
 </head>
@@ -33,9 +32,6 @@
 	<div class="wrap">
 		<jsp:include page="/WEB-INF/views/FirstPage/header.jsp"></jsp:include>
 		<jsp:include page="/WEB-INF/views/FirstPage/nav.jsp"></jsp:include>
-
-
-
 
 		<div class="fund_detail">
 
@@ -58,8 +54,8 @@
 				<!-- 개별 내용 -->
 				<div class="fund_each_detail2">
 					<table>
-					
-						
+
+
 						<tr>
 							<th>목표금액</th>
 
@@ -75,7 +71,7 @@
 							<th>마감일</th>
 
 						</tr>
-						
+
 						<tr>
 
 							<td>${result.getPdate()}</td>
@@ -89,7 +85,7 @@
 						</tr>
 
 					</table>
-					<br>	<br>
+					<br> <br>
 					<!-- 개별 내용 end -->
 					<div class="addcart">
 						<form action="addCart?pnum=${result.getProject_num()}"
@@ -110,13 +106,10 @@
 					<div class="prod_info_content">
 						${result.getPdate()}${result.getPcontent()}</div>
 
-
 				</div>
-
-
 				<div id="comment">
-					&lt; 댓글 &gt; <br> <input type="text" name="write_comment">
-					<input type="button" value="등록">
+					&lt; 댓글 &gt; <br> <input type="text" id="write_comment">
+					<input type="button" value="등록" id="addComment">
 				</div>
 			</div>
 		</div>

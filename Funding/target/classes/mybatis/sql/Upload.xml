@@ -4,18 +4,26 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mybatis.Upload.xml">
+    <!-- 관리자 전용 불러오기 -->
+	<select id="projectAll"  resultType="UploadVO">
+		select
+		p.project_num,p.ptitle,m.nickname,p.regdate,p.pVerify 
+		from project p, member m
+		WHERE p.id_fk = m.id
+		order by p.regdate DESC;
+	</select>
+	
 	<select id="getAll" parameterType="String" resultType="UploadVO">
 		select
 		p.project_num,p.ptitle,m.nickname,p.regdate,p.pVerify 
-		from project p,
-		member m
+		from project p, member m
 		WHERE p.id_fk=#{id_fk}
 		AND p.id_fk = m.id
 		order by p.regdate DESC;
 	</select>
 
 
-	<insert id="insertProj" parameterType="java.util.Map">
+	<insert id="insertProject" parameterType="java.util.Map">
 		INSERT INTO project (ptitle, pcontent,totMoney, id_fk, pdate,
 		pCategory, ppic1, pDetail_img) VALUES
 		<foreach collection="list" item="item" separator=" , ">
@@ -25,7 +33,7 @@
 		</foreach>
 	</insert>
 
-	<insert id="insertRew" parameterType="java.util.Map">
+	<insert id="insertReward" parameterType="java.util.Map">
 		insert into reward(project_num_fk,prodName, prodPrice, prodCount)
 		values
 		<foreach collection="reward" item="item" separator=" , ">

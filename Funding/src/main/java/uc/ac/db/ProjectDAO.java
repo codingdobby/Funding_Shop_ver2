@@ -1,18 +1,12 @@
 package uc.ac.db;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import uc.ac.vo.ProdVO;
+import uc.ac.vo.ProductVO;
 import uc.ac.vo.ProjectVO;
 
 @Component
@@ -21,7 +15,7 @@ public class ProjectDAO {
 	@Autowired
 	private org.apache.ibatis.session.SqlSession SqlSession;
 
-	String namespace = "mybatis.project.xml";
+	String namespace = "mybatis.Project.xml";
 
 	public List<ProjectVO> getAll() {
 		return SqlSession.selectList(namespace + ".getAll");
@@ -42,8 +36,8 @@ public class ProjectDAO {
 
 	}
 	/**************************************************/
-	public List<ProdVO> getProd(int pnum) {
-		return SqlSession.selectList(namespace + ".getProd", pnum);
+	public List<ProductVO> getProduct(int pnum) {
+		return SqlSession.selectList(namespace + ".getProduct", pnum);
 
 	}
 
@@ -94,4 +88,8 @@ public class ProjectDAO {
 		return SqlSession.selectList(namespace + ".search", ptitle);
 	}
 
+	/*관리자 승인 기능*/
+	public void admit(String pnum) {
+		SqlSession.update(namespace + ".admit", pnum);
+	}
 }

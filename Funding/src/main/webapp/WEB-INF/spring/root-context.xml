@@ -15,8 +15,9 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
 		<property name="driverClass" value="org.mariadb.jdbc.Driver"></property>
-		<property name="url" value="jdbc:mariadb://localhost:3306/board"></property>
-		<property name="username" value="jmy"></property>
+		<property name="url"
+			value="jdbc:mariadb://localhost:1186/funding" />
+		<property name="username" value="root"></property>
 		<property name="password" value="1234"></property>
 	</bean>
 
@@ -29,16 +30,14 @@
 			value="classpath*:/mybatis/sql/*.xml"></property>
 	</bean>
 
-	<bean id="sqlSession"
-		class="org.mybatis.spring.SqlSessionTemplate">
-		<constructor-arg name="sqlSessionFactory"
-			ref="sqlSessionFactory"></constructor-arg>
+	<bean id="sqlSession" 	class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"></constructor-arg>
 	</bean>
 
 
-<context:component-scan base-package="uc.ac.db" />
-<context:component-scan base-package="uc.ac.common" />
-<context:component-scan base-package="uc.ac.service" />
-<context:component-scan base-package="uc.ac.vo" />
+	<context:component-scan base-package="uc.ac.db" />
+	<context:component-scan	base-package="uc.ac.common" />
+	<context:component-scan base-package="uc.ac.service" />
+	<context:component-scan base-package="uc.ac.vo" />
 
 </beans>

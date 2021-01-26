@@ -1,6 +1,6 @@
 package uc.ac.vo;
 
-public class CatVO {
+public class CategoryVO {
 	private String cateName;
 	private int cateCode;
 	private int cateCodeRef;

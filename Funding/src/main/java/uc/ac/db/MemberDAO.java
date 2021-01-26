@@ -15,7 +15,7 @@ public class MemberDAO {
 	@Autowired
 	private org.apache.ibatis.session.SqlSession SqlSession;
 
-	String namespace = "mybatis.mybatis-config.xml";
+	String namespace = "mybatis.Member.xml";
 
 	// 회원가입
 	public void join(MemberVO vo) {

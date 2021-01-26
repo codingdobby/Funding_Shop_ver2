@@ -8,9 +8,9 @@ import uc.ac.vo.UploadVO;
 public interface UploadService {
 	public List<UploadVO> projectALL();
 	public List<UploadVO> getAll(String id);
-	public void insertProj(UploadVO vo);
+	public void insertProject(UploadVO vo);
 	
 	//상품 정보 넣기
-	public void insertRew(RewardVO vo);
+	public void insertReward(RewardVO vo);
 	public int getProject_num_fk(String ptitle);
 }

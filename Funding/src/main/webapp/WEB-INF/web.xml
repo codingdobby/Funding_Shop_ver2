@@ -56,12 +56,16 @@
 		<location>/400</location>
 	</error-page>
 	<error-page>
+
 		<error-code>404</error-code>
-		<location>/404</location>
+
+		<location>/WEB-INF/views/ErrorPage/error404.jsp</location>
+
 	</error-page>
+
 	<error-page>
 		<error-code>500</error-code>
-		<location>/src/main/webapp/WEB-INF/views/ErrorPage/500.html</location>
+		<location>/WEB-INF/views/ErrorPage/500.html</location>
 	</error-page>
 
 

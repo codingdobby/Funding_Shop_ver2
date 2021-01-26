@@ -3,9 +3,9 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mybatis.mybatis-config.xml">
+<mapper namespace="mybatis.Member.xml">
 	<!-- 회원가입 -->
-	<insert id="join" parameterType="uc.ac.vo.MemberVO">
+	<insert id="join" parameterType="MemberVO">
 		insert into member
 		(nickname, id,
 		pwd, phone, address)
@@ -14,7 +14,7 @@
 	</insert>
 
 	<!-- 회원인지 확인 -->
-	<select id="checkMember" resultType="uc.ac.vo.MemberVO"
+	<select id="checkMember" resultType="MemberVO"
 		parameterType="hashMap">
 
 		select * from member where id=#{id} and pwd=#{pwd}
@@ -32,7 +32,7 @@
 	</select>
 
 	<!-- 회원 정보 모두 가져오기 -->
-	<select id="getAll" resultType="uc.ac.vo.MemberVO">
+	<select id="getAll" resultType="MemberVO">
 
 		select * from member
 
@@ -41,7 +41,7 @@
 	
 	<!-- verify값 가져오기 -->
 	
-		<select id="getVerify" resultType="uc.ac.vo.MemberVO">
+		<select id="getVerify" resultType="MemberVO">
 
 		select * from member
 

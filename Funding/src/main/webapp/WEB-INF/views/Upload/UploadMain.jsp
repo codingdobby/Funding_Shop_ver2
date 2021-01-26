@@ -40,7 +40,7 @@
 		String phone = (String) session.getAttribute("phone");
 		String address = (String) session.getAttribute("address");
 	%>
-	<form action="insertProd" method="post" id="insertBoardFrm"
+	<form action="insertProduct" method="post" id="insertBoardFrm"
 		enctype="multipart/form-data">
 	
 		<div class="Upload_name">

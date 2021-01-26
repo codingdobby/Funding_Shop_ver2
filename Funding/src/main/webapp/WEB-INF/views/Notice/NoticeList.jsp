@@ -49,36 +49,34 @@
 			</table>
 
 		</div>
-			
-		
+
+
 		<div align="center">
-	<div id="paging">
-			<c:if test="${prev}">
-				<span>[ <a href="notice?num=${startPageNum - 1}">이전</a>
-					]
-				</span>
-			</c:if>
+			<div id="paging">
+				<c:if test="${prev}">
+					<span>[ <a href="notice?num=${startPageNum - 1}">이전</a> ]
+					</span>
+				</c:if>
 
-			<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
-				<span> <c:if test="${select!=num}">
+				<c:forEach begin="${startPageNum}" end="${endPageNum}" var="num">
+					<span> <c:if test="${select!=num}">
 
 
-						<a href="notice?num=${num}">${num}</a>
-					</c:if> <c:if test="${select==num }">
-						<strong>${num}</strong>
-					</c:if>
-				</span>
-			</c:forEach>
+							<a href="notice?num=${num}">${num}</a>
+						</c:if> <c:if test="${select==num }">
+							<strong>${num}</strong>
+						</c:if>
+					</span>
+				</c:forEach>
 
-			<c:if test="${next}">
-				<span>[ <a href="notice?num=${endPageNum + 1}">다음</a>
-					]
-				</span>
-			</c:if>
+				<c:if test="${next}">
+					<span>[ <a href="notice?num=${endPageNum + 1}">다음</a> ]
+					</span>
+				</c:if>
+			</div>
 		</div>
-		</div>
-<br>
-<%
+		<br>
+		<%
 			String name = (String) session.getAttribute("name");
 
 			if (name != null && name.equals("관리자")) {
@@ -88,12 +86,12 @@
 				<input type="submit" value="글쓰기">
 			</form>
 		</div>
-			<%
+		<%
 			}
-			
-			%>
-		<jsp:include page="/WEB-INF/views/FirstPage/footer.jsp"></jsp:include>
+		%>
+
 	</div>
 </body>
 
 </html>
+<jsp:include page="/WEB-INF/views/FirstPage/footer.jsp"></jsp:include>

@@ -12,48 +12,48 @@ import uc.ac.vo.NoticeVO;
 public class NoticeServiceImp implements NoticeService {
 
 	@Autowired
-	NoticeDAO dao;
+	NoticeDAO noticeDAO;
 
 	@Override
 	public NoticeVO getContent(int no) {
 
-		return dao.getContent(no);
+		return noticeDAO.getContent(no);
 	}
 
 	@Override
 	public void hitUpdate(int no) {
-		dao.hitUpdate(no);
+		noticeDAO.hitUpdate(no);
 
 	}
 
 	@Override
 	public List<NoticeVO> getAll() {
 
-		return dao.getAll();
+		return noticeDAO.getAll();
 	}
 
 	@Override
 	public void noticeInsert(String nTitle, String nContent, String nWriter) {
-		dao.noticeInsert(nTitle, nContent, nWriter);
+		noticeDAO.noticeInsert(nTitle, nContent, nWriter);
 
 	}
 
 	@Override
 	public int cnt() {
-		return dao.cnt();
+		return noticeDAO.cnt();
 
 	}
 
 	@Override
 	public List<NoticeVO> listPage(int displayPost, int postNum) throws Exception {
-		return dao.listPage(displayPost, postNum);
+		return noticeDAO.listPage(displayPost, postNum);
 
 	}
 
 	@Override
 	public void noticeDelete(int num) {
-		dao.noticeDelete(num);
-		
+		noticeDAO.noticeDelete(num);
+
 	}
 
 }

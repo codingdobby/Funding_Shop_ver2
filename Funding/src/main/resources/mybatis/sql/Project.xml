@@ -3,7 +3,7 @@
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="mybatis.project.xml">
+<mapper namespace="mybatis.Project.xml">
 	<!-- 상품 다 가져오기 -->
 	<select id="getAll" resultType="ProjectVO">
 		select
@@ -48,7 +48,7 @@
 		p.project_num=#{project_num};
 	</select>
 
-	<select id="getProd" parameterType="Integer" resultType="ProdVO">
+	<select id="getProduct" parameterType="Integer" resultType="ProductVO">
 		select
 		prodCount,prodName,prodNum
 		from reward
@@ -106,6 +106,10 @@
 		desc
 	</select>
 
+
+	<update id="admit" parameterType="String">
+	update project set pVerify=1 where project_num=#{project_num}
+	</update>
 </mapper>
 
 

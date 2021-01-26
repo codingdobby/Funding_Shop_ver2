@@ -40,7 +40,7 @@
 					<tr>
 						<td>${vo.getProject_num()}</td>
 						<td><a href="fundDetail?pnum=${vo.getProject_num()}">${vo.getPtitle()}</a></td>
-						<td>${vo.getName()}</td>
+						<td>${vo.getNickname()}</td>
 						<td>${vo.getRegdate()}</td>
 						<td>${vo.getpVerify()}</td>
 						<td><input type="button" value="승인"

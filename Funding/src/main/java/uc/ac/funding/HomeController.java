@@ -1,14 +1,9 @@
 package uc.ac.funding;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -22,13 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import net.sf.json.JSONArray;
-import uc.ac.db.MemberDAO;
-import uc.ac.db.ProjectDAO;
-import uc.ac.service.CatService;
+import uc.ac.service.CategoryService;
 import uc.ac.service.MemberService;
 import uc.ac.service.ProjectService;
-import uc.ac.vo.CatVO;
+import uc.ac.vo.CategoryVO;
 import uc.ac.vo.MemberVO;
 import uc.ac.vo.ProjectVO;
 
@@ -42,10 +34,10 @@ public class HomeController {
 	private MemberService service;
 
 	@Autowired
-	private ProjectService ProService;
+	private ProjectService ProjectService;
 
 	@Autowired
-	private CatService CatService;
+	private CategoryService categoryService;
 
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
@@ -54,76 +46,87 @@ public class HomeController {
 	 */
 
 	@RequestMapping("/")
-	public String home(HttpServletRequest request, Model model) {// id,pwd확인
+	public String home(HttpServletRequest request, Model model) {// id,pwd�솗�씤
 
 		List<MemberVO> verifyBotari = service.getVerify();
 		model.addAttribute("verifyBotari", verifyBotari);
 
-		/************* 인기 있는 상품 가져오기 ******************************/
+		/************* 최다 조회 상품 ******************************/
 
-		List<ProjectVO> hitBotari = ProService.getHitItem();
+		List<ProjectVO> hitBotari = ProjectService.getHitItem();
 		model.addAttribute("hitBotari", hitBotari);
 
-		/************* 새상품 가져오기 ******************************/
+		/************* 신규 아이템 ******************************/
 
-		List<ProjectVO> newBotari = ProService.getNewItem();
+		List<ProjectVO> newBotari = ProjectService.getNewItem();
 		model.addAttribute("newBotari", newBotari);
 
-		return "/FirstPage/main";
+		if (verifyBotari.isEmpty() || hitBotari.isEmpty() || newBotari.isEmpty()) {
+			return "/FirstPage/main_ready";
+		} else {
+			return "/FirstPage/main";
+		}
 	}
 
+	// 페이지 이동해도 카테고리 보여주기 ajax통신
+	@ResponseBody
 	@RequestMapping(value = "/nav", method = RequestMethod.POST)
-	public void nav(Model model) {// id,pwd확인
+	public Map<String, List> nav() {
 
-		List<CatVO> category = CatService.getCat();
-		System.out.println("value : " + category.get(0).getCateName());
+		List<CategoryVO> category = categoryService.getCategory();
+		Map<String, List> map = new HashMap<String, List>();
 
-		JSONArray jsonArray = new JSONArray();
-		model.addAttribute("jsonList", jsonArray.fromObject(category));
+		map.put("category", category);
+
+		return map;
 
 	}
 
 	@RequestMapping("/main.do")
-	public String main(HttpServletRequest request, Model model) {// id,pwd확인
-		List<CatVO> category = CatService.getCat();
-		model.addAttribute("category", category);
+	public String main(HttpServletRequest request, Model model) {// id,pwd�솗�씤
+
 		List<MemberVO> verifyBotari = service.getVerify();
 		model.addAttribute("verifyBotari", verifyBotari);
 
-		/************* 인기 있는 상품 가져오기 ******************************/
+		/************* 최다 조회 상품 ******************************/
 
-		List<ProjectVO> hitBotari = ProService.getHitItem();
+		List<ProjectVO> hitBotari = ProjectService.getHitItem();
 		model.addAttribute("hitBotari", hitBotari);
 
-		/************* 새상품 가져오기 ******************************/
+		/************* 신규 아이템 ******************************/
 
-		List<ProjectVO> newBotari = ProService.getNewItem();
+		List<ProjectVO> newBotari = ProjectService.getNewItem();
 		model.addAttribute("newBotari", newBotari);
 
-		return "/FirstPage/main";
+		if (verifyBotari.isEmpty() || hitBotari.isEmpty() || newBotari.isEmpty()) {
+			return "/FirstPage/main_ready";
+		} else {
+			return "/FirstPage/main";
+		}
+
 	}
 
-	/*********** 로그인 기능 ******************************/
-	// 로그인 페이지로 이동
+	/*********** 濡쒓렇�씤 湲곕뒫 ******************************/
+	// 濡쒓렇�씤 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("/go_login.do")
-	public String go_login(HttpServletRequest request) {// id,pwd확인
+	public String go_login(HttpServletRequest request) {// id,pwd�솗�씤
 
 		return "/Login/login";
 	}
 
-	// 로그인 하는 기능
+	// 濡쒓렇�씤 �븯�뒗 湲곕뒫
 	@RequestMapping("/loginOK.do")
-	public String loginOK(HttpServletRequest request, Model model) {// id,pwd확인
+	public String loginOK(HttpServletRequest request, Model model) {// id,pwd�솗�씤
 
-		String id = request.getParameter("id");// 아이디 값 가져오기
-		String pwd = request.getParameter("pwd");// 비밀번호 값 가져오기
+		String id = request.getParameter("id");
+		String pwd = request.getParameter("pwd");
 
 		MemberVO find = service.checkMember(id, pwd);
 
-		if (find != null) {// 회원
-			System.out.println(find.getNickname() + "회원^^");
+		if (find != null) {// �쉶�썝
+			System.out.println(find.getNickname() + "회원님^^");
 
-			// 로그인 성공시 session객체에 성공한 사람의 이름을 name변수에 저장
+			// 濡쒓렇�씤 �꽦怨듭떆 session媛앹껜�뿉 �꽦怨듯븳 �궗�엺�쓽 �씠由꾩쓣 name蹂��닔�뿉 ���옣
 
 			HttpSession session = request.getSession();
 			session.setAttribute("name", find.getNickname());
@@ -136,7 +139,7 @@ public class HomeController {
 			model.addAttribute("verifyBotari", verifyBotari);
 
 			// response.sendRedirect("main.jsp");
-		} else {// 비회원
+		} else {
 			System.out.println("비회원");
 			// response.sendRedirect("memberJoin.jsp");
 
@@ -145,29 +148,29 @@ public class HomeController {
 		return "redirect:main.do";
 	}
 
-	// 로그아웃
+	// 濡쒓렇�븘�썐
 	@RequestMapping("/logout.do")
-	public String logout(HttpServletRequest request) {// id,pwd확인
+	public String logout(HttpServletRequest request) {// id,pwd�솗�씤
 		return "/Login/logout";
 	}
 
-	/*********************** 회원가입 기능 ******************/
-	// 동의 페이지로 이동
+	/*********************** �쉶�썝媛��엯 湲곕뒫 ******************/
+	// �룞�쓽 �럹�씠吏�濡� �씠�룞
 	@RequestMapping("/agree.do")
-	public String MemJoin(HttpServletRequest request) {// id,pwd확인
+	public String MemJoin(HttpServletRequest request) {// id,pwd�솗�씤
 
 		return "/Login/agree";
 	}
 
 	@RequestMapping("/go_insert.do")
-	public String go_insert(HttpServletRequest request) {// id,pwd확인
+	public String go_insert(HttpServletRequest request) {// id,pwd�솗�씤
 
 		return "/Login/MemJoin";
 	}
 
-	// 회원가입 정보 입력
+	// �쉶�썝媛��엯 �젙蹂� �엯�젰
 	@RequestMapping("/loginInsert.do")
-	public String loginInsert(HttpServletRequest request) {// id,pwd확인
+	public String loginInsert(HttpServletRequest request) {// id,pwd�솗�씤
 		String name = request.getParameter("nickname");
 		String id = request.getParameter("id");
 		String pwd = request.getParameter("pwd");
@@ -176,21 +179,21 @@ public class HomeController {
 
 		MemberVO vo = new MemberVO(name, id, pwd, phone, address, 0);
 		// memberDAO dao = new memberDAO();
-		service.join(vo);// DB에 입력받은 회원정보(vo)를 저장
+		service.join(vo);// DB�뿉 �엯�젰諛쏆� �쉶�썝�젙蹂�(vo)瑜� ���옣
 
 		return "redirect:main.do";
 
 	}
 
-	/*********************** 비밀번호 관련 기능 ******************/
+	/*********************** 鍮꾨�踰덊샇 愿��젴 湲곕뒫 ******************/
 
 	@RequestMapping("/findPwd.do")
-	public String findPwd(HttpServletRequest request, Model model) {// id,pwd확인
+	public String findPwd(HttpServletRequest request, Model model) {// id,pwd�솗�씤
 
 		return "/Login/findPwd";
 	}
 
-	@RequestMapping(value = "/findPwdTest.do", method = RequestMethod.POST) // 이동
+	@RequestMapping(value = "/findPwdTest.do", method = RequestMethod.POST) // �씠�룞
 	@ResponseBody
 	public String findPwdTest(HttpServletRequest request, Model model, String checkid) {
 
@@ -199,9 +202,9 @@ public class HomeController {
 		}
 		String checkId = service.checkID(checkid);
 
-		if (checkId != null) {// 회원
+		if (checkId != null) {// �쉶�썝
 
-			// 로그인 성공시 session객체에 성공한 사람의 이름을 name변수에 저장
+			// 濡쒓렇�씤 �꽦怨듭떆 session媛앹껜�뿉 �꽦怨듯븳 �궗�엺�쓽 �씠由꾩쓣 name蹂��닔�뿉 ���옣
 			HttpSession session = request.getSession();
 			session.setAttribute("checkid", checkid);
 			return "success";
@@ -213,14 +216,14 @@ public class HomeController {
 
 	}
 
-	@RequestMapping("/findPwd2.do") // 이동
+	@RequestMapping("/findPwd2.do") // �씠�룞
 	public String findPwd2() {
 
 		return "/Login/findPwd2";
 	}
 
 	@RequestMapping("/update_pwd.do")
-	public String update_pwd(HttpServletRequest request) {// id,pwd확인
+	public String update_pwd(HttpServletRequest request) {// id,pwd�솗�씤
 		String pwd = request.getParameter("pwd");
 		System.out.println(pwd);
 
@@ -231,20 +234,6 @@ public class HomeController {
 		service.updatePwd(pwd, checkid);
 
 		return "redirect:main.do";
-	}
-
-	public class ErrorHandling {
-		String path = "/error";
-
-		@RequestMapping(value = "/404")
-		public String error404() {
-			return path + "/404";
-		}
-		
-		@RequestMapping(value = "/500")
-		public String error500() {
-			return path + "/500";
-		}
 	}
 
 }

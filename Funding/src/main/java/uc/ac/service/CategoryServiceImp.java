@@ -5,18 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import uc.ac.db.CatDAO;
-import uc.ac.vo.CatVO;
+import uc.ac.db.CategoryDAO;
+import uc.ac.vo.CategoryVO;
 
 @Service
-public class CatServiceImp implements CatService {
+public class CategoryServiceImp implements CategoryService {
 	@Autowired
-	CatDAO dao;
+	CategoryDAO categoryDAO;
 
 	@Override
-	public List<CatVO> getCat() {
+	public List<CategoryVO> getCategory() {
 
-		return dao.getCat();
+		return categoryDAO.getCategory();
 	}
 
 }

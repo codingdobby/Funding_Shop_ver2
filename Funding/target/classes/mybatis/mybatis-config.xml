@@ -8,11 +8,11 @@
 	<typeAliases>
 		<typeAlias type="uc.ac.vo.MemberVO" alias="MemberVO" />
 		<typeAlias type="uc.ac.vo.ProjectVO" alias="ProjectVO" />
-		<typeAlias type="uc.ac.vo.ProdVO" alias="ProdVO" />
-		<typeAlias type="uc.ac.vo.CatVO" alias="CatVO" />
+		<typeAlias type="uc.ac.vo.ProductVO" alias="ProductVO" />
+		<typeAlias type="uc.ac.vo.CategoryVO" alias="CategoryVO" />
 		<typeAlias type="uc.ac.vo.NoticeVO" alias="NoticeVO" />
 		<typeAlias type="uc.ac.vo.UploadVO" alias="UploadVO" />
-			<typeAlias type="uc.ac.vo.RewardVO" alias="RewardVO" />
+		<typeAlias type="uc.ac.vo.RewardVO" alias="RewardVO" />
 	</typeAliases>
 
 </configuration>

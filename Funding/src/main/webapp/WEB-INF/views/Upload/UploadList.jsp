@@ -61,7 +61,7 @@
 
 	</div>
 
-	<form action="go_insertProd" method="post">
+	<form action="go_insertProduct" method="post">
 		<input type="submit" value="프로젝트 생성">
 	</form>
 

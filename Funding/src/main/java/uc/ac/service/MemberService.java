@@ -17,25 +17,22 @@ public interface MemberService {
 	// 회원 목록 가져오기
 	public List<MemberVO> getAll();
 
-	/**************
-	 * verify값 가져오기
-	 *****************/
+	
+	//인증 값 가져오기-> 사용자 역할 구분
 	public List<MemberVO> getVerify();
 
-	/******************* 삭제 *******************************/
-
+	//탈퇴
 	public void delete(String id);
 
 	/************** 비밀번호 관련 기능 **************************************/
 
-	public String checkID(String checkid);
+	public String checkID(String checkId);
 
-	/********************* 마이페이지에서 값 수정 ****************************/
+	//개인 정보 수정
 	public void updateInfo(String nickname, String pwd, String phone, String address, String id);
 
-	/********************* 비밀번호 재설정 ****************************/
-
-	public void updatePwd(String pwd, String checkid);
+	//비밀 번호 재설정
+	public void updatePwd(String pwd, String checkId);
 
 	public List<CartVO> getCart(String id_fk);
 

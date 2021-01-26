@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="mybatis.Category.xml">
-	<select id="catList" resultType="CatVO">
+	<select id="catList" resultType="CategoryVO">
 		select * 
 		from category 
 		where cateCodeRef is null;

@@ -13,37 +13,35 @@ import uc.ac.vo.UploadVO;
 public class UploadServiceImp implements UploadService {
 
 	@Autowired
-	UploadDAO dao;
+	UploadDAO uploadDAO;
 
 	@Override
 	public List<UploadVO> projectALL() {
 
-		return dao.projectALL();
+		return uploadDAO.projectALL();
 	}
 
 	@Override
 	public List<UploadVO> getAll(String id) {
-		return dao.getAll(id);
+		return uploadDAO.getAll(id);
 
 	}
 
-	
-	
 	@Override
-	public void insertProj(UploadVO vo) {
-		dao.insertproj(vo);
+	public void insertProject(UploadVO vo) {
+		uploadDAO.insertProject(vo);
 	}
 
 	@Override
-	public void insertRew(RewardVO vo) {
-		dao.insertRew(vo);
-		
+	public void insertReward(RewardVO vo) {
+		uploadDAO.insertReward(vo);
+
 	}
 
 	@Override
 	public int getProject_num_fk(String ptitle) {
-		
-		return dao.getProject_num_fk(ptitle);
+
+		return uploadDAO.getProject_num_fk(ptitle);
 	}
 
 }

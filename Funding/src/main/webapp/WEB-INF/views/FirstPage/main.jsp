@@ -16,7 +16,7 @@
 
 <!-- 요소 디자인 -->
 <link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/css/main_css.css"
+	href="${pageContext.request.contextPath}/resources/css/main.css"
 	type="text/css">
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/css/swiper.min.css"
@@ -26,10 +26,13 @@
 <jsp:include page="/WEB-INF/views/FirstPage/header.jsp"></jsp:include>
 <body>
 	<jsp:include page="/WEB-INF/views/FirstPage/nav.jsp"></jsp:include>
+	<hr>
+<!-- 배너 슬라이드-->
 	<div id="wrap">
 		<div align="center">
 			<div class="swiper-container gallery-top">
 				<div class="swiper-wrapper">
+
 					<c:forEach var='vo' items='${newBotari}'>
 						<div class="swiper-slide">
 							<a href="fundDetail?pnum=${vo.getProject_num()}"><img
@@ -52,8 +55,10 @@
 				</div>
 			</div>
 			<!-- 배너 슬라이드 end -->
+
+			<hr>
 			<br>
-			
+
 			<h2>최다 조회수 상품</h2>
 			<div class="fund_each">
 				<c:forEach var='vo' items='${hitBotari}'>
@@ -78,17 +83,17 @@
 						</tr>
 						<tr>
 
-							<td>${vo.getPdate()} <span id="text">마감</span></td>
+							<td>${vo.getPdate()}<span id="text">마감</span></td>
 							<td><fmt:formatNumber value="${vo.getTotMoney()}"
 									pattern="###,###,###" /><span id="text">원 달성</span></td>
 						</tr>
 					</table>
 				</c:forEach>
 			</div>
-			
+
 			<!-- 개별 타이틀 end-->
 			<h2>최신 상품</h2>
-				<div class="fund_each">
+			<div class="fund_each">
 				<c:forEach var='vo' items='${newBotari}'>
 					<table border="1">
 
@@ -111,28 +116,27 @@
 						</tr>
 						<tr>
 
-							<td><span id="big_text">${vo.getPdate()}</span> <span id="text">마감</span></td>
-							<td><span id="big_text"><fmt:formatNumber value="${vo.getTotMoney()}"
-									pattern="###,###,###" /></span><span id="text">원 달성</span></td>
+							<td><span id="big_text">${vo.getPdate()}</span> <span
+								id="text">마감</span></td>
+							<td><span id="big_text"><fmt:formatNumber
+										value="${vo.getTotMoney()}" pattern="###,###,###" /></span><span
+								id="text">원 달성</span></td>
 						</tr>
 					</table>
 				</c:forEach>
 				<br>
 			</div>
-			
+
 			<br>
-<!-- align center end -->
+			<!-- align center end -->
 
 		</div>
 
-<!-- wrap end -->
+		<!-- wrap end -->
 	</div>
-	
+
 
 	<!-- end wrap -->
-
-	
-
 </body>
 </html>
 <jsp:include page="/WEB-INF/views/FirstPage/footer.jsp"></jsp:include>

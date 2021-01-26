@@ -40,7 +40,7 @@ import uc.ac.db.UploadDAO;
 import uc.ac.service.UploadService;
 import uc.ac.vo.MemberVO;
 import uc.ac.vo.PhotoVO;
-import uc.ac.vo.ProdVO;
+import uc.ac.vo.ProductVO;
 import uc.ac.vo.ProjectVO;
 import uc.ac.vo.RewardVO;
 import uc.ac.vo.UploadVO;
@@ -73,21 +73,21 @@ public class UploadController {
 		return "/Upload/UploadList";
 	}
 
-	@RequestMapping("/go_insertProd")
-	public String go_insertProd(HttpServletRequest request, Model model) {// id,pwd확인
+	@RequestMapping("/go_insertProduct")
+	public String go_insertProduct(HttpServletRequest request, Model model) {// id,pwd확인
 
 		return "/Upload/UploadMain";
 	}
 
-	@RequestMapping("/insertProd")
-	public String insertProd(HttpServletRequest request, @RequestParam("ppic1") MultipartFile ppic1, Model model) {// id,pwd확인
+	@RequestMapping("/insertProduct")
+	public String insertProduct(HttpServletRequest request, @RequestParam("ppic1") MultipartFile ppic1, Model model) {// id,pwd확인
 
-		String ptitle = request.getParameter("ptitle");
-		String pcontent = request.getParameter("pcontent");
-		String pdate = request.getParameter("pdate");
-		String pcategory = request.getParameter("pcategory");
+		String pTitle = request.getParameter("ptitle");
+		String pContent = request.getParameter("pcontent");
+		String pDate = request.getParameter("pdate");
+		String pCategory = request.getParameter("pcategory");
 
-		int totMoney = Integer.parseInt(request.getParameter("totMoney"));
+		int totalMoney = Integer.parseInt(request.getParameter("totMoney"));
 
 		HttpSession session = request.getSession();
 		String id_fk = (String) session.getAttribute("id");
@@ -124,21 +124,21 @@ public class UploadController {
 
 		/**********************************************************/
 		UploadVO vo = new UploadVO();
-		vo.setPtitle(ptitle);
-		vo.setPcontent(pcontent);
-		vo.setTotMoney(totMoney);
+		vo.setPtitle(pTitle);
+		vo.setPcontent(pContent);
+		vo.setTotMoney(totalMoney);
 		vo.setId_fk(id_fk);
-		vo.setPdate(pdate);
+		vo.setPdate(pDate);
 		vo.setPpic1(originalFilename);
 		vo.setpDetail_img(originalFilename);
-		vo.setpCategory(pcategory);
+		vo.setpCategory(pCategory);
 
 		// 프로젝트 정보 저장
-		service.insertProj(vo);
+		service.insertProject(vo);
 
-		session.setAttribute("ptitle", ptitle);
+		session.setAttribute("ptitle", pTitle);
 
-		return "Upload/UploadProd";
+		return "Upload/UploadProduct";
 	}
 
 	@RequestMapping("/insert_OK")
@@ -148,17 +148,17 @@ public class UploadController {
 
 		int project_num_fk = service.getProject_num_fk(ptitle);
 
-		String prodName = request.getParameter("prodName");
-		int prodPrice = Integer.parseInt(request.getParameter("prodPrice"));
-		int prodCount = Integer.parseInt(request.getParameter("prodCount"));
+		String productName = request.getParameter("prodName");
+		int productPrice = Integer.parseInt(request.getParameter("prodPrice"));
+		int productCount = Integer.parseInt(request.getParameter("prodCount"));
 		// 상품 저장
 		RewardVO vo = new RewardVO();
-		vo.setProdName(prodName);
-		vo.setProdCount(prodCount);
-		vo.setProdPrice(prodPrice);
+		vo.setProdName(productName);
+		vo.setProdCount(productCount);
+		vo.setProdPrice(productPrice);
 		vo.setProject_num_fk(project_num_fk);
 
-		service.insertRew(vo);
+		service.insertReward(vo);
 
 		return "redirect:upload";
 	}

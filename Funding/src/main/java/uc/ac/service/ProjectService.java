@@ -1,20 +1,19 @@
 package uc.ac.service;
 
-import java.util.HashMap;
+
 import java.util.List;
 
-import uc.ac.vo.ProdVO;
+import uc.ac.vo.ProductVO;
 import uc.ac.vo.ProjectVO;
 
 public interface ProjectService {
 	public List<ProjectVO> getAll();
 	public List<ProjectVO> getContent(int pnum);
-	
 	public List<ProjectVO> getNewProject();
 	public List<ProjectVO> getPopularProject();
 
 	/**************************************************/
-	public List<ProdVO> getProd(int pnum);
+	public List<ProductVO> getProd(int pnum);
 
 	/************ 프로젝트 조회수+1 *****************/
 
@@ -41,4 +40,5 @@ public interface ProjectService {
 	/************ 프로젝트 검색 *****************/
 	 public List<ProjectVO> search(String ptitle);
 
+	 public void admit(String project_num);
 }

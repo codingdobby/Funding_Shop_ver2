@@ -216,5 +216,12 @@
 	height: auto;
 	padding: 30px;
 	margin: 20px;
+	
+}
+
+
+#comment {
+	background-color: yellow;
 	width: 80%;
+	height: auto;
 }

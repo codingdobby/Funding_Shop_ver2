@@ -6,84 +6,90 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import uc.ac.db.ProjectDAO;
-import uc.ac.vo.ProdVO;
+import uc.ac.vo.ProductVO;
 import uc.ac.vo.ProjectVO;
 
 @Service
 public class ProjectServiceImp implements ProjectService {
 
 	@Autowired
-	ProjectDAO dao;
+	ProjectDAO projectDAO;
 	
 	
 	@Override
 	public List<ProjectVO> getAll() {
 		
-		return dao.getAll();
+		return projectDAO.getAll();
 	}
 
 	@Override
 	public List<ProjectVO> getContent(int pnum) {
 		
-		return dao.getContent(pnum);
+		return projectDAO.getContent(pnum);
 	}
 
 	@Override
-	public List<ProdVO> getProd(int pnum) {
+	public List<ProductVO> getProd(int pnum) {
 		
-		return dao.getProd(pnum);
+		return projectDAO.getProduct(pnum);
 		}
 
 	@Override
 	public void phitUpdate(int pnum) {
-		dao.phitUpdate(pnum);
+		projectDAO.phitUpdate(pnum);
 
 	}
 
 	@Override
 	public List<ProjectVO> getHitItem() {
 		
-		return dao.getHitItem();
+		return projectDAO.getHitItem();
 	}
 
 	@Override
 	public List<ProjectVO> getNewItem() {
 		
-		return dao.getNewItem();
+		return projectDAO.getNewItem();
 	}
 
 	@Override
 	public void addCart(int id_fk, int project_num_fk, int prodNum_fk) {
-		dao.addCart(id_fk, project_num_fk, prodNum_fk);
+		projectDAO.addCart(id_fk, project_num_fk, prodNum_fk);
 
 	}
 
 	@Override
 	public void minusProduct(int prodNum) {
-		dao.minusProduct(prodNum);
+		projectDAO.minusProduct(prodNum);
 	}
 
 	@Override
 	public void plusMoney(int projectNum) {
-		dao.plusMoney(projectNum);
+		projectDAO.plusMoney(projectNum);
 
 	}
 
 	@Override
 	public List<ProjectVO> search(String ptitle) {
 		
-		return dao.search(ptitle);
+		return projectDAO.search(ptitle);
 	}
 
 	@Override
 	public List<ProjectVO> getNewProject() {
 		
-		return dao.getNewProject();
+		return projectDAO.getNewProject();
 	}
 
 	@Override
 	public List<ProjectVO> getPopularProject() {
-		return dao.getPopularProject();
+		return projectDAO.getPopularProject();
+	}
+
+	@Override
+	public void admit(String project_num) {
+		 projectDAO.admit(project_num);
+		
 	}
 
 }

@@ -94,7 +94,7 @@
 		String phone = (String) session.getAttribute("phone");
 		String address = (String) session.getAttribute("address");
 	%>
-
+<div>
 	<form name="iform" method="post">
 		<div class="mypage_content">
 
@@ -161,7 +161,7 @@
 
 		</div>
 	</form>
-	<jsp:include page="/WEB-INF/views/FirstPage/footer.jsp"></jsp:include>
-
+	</div>
+<jsp:include page="/WEB-INF/views/FirstPage/footer.jsp"></jsp:include>
 </body>
 </html>

@@ -7,7 +7,7 @@
 
 footer {
 	border: 1px solid black;
-	position: absolute;
+	position:absolute;
 	bottom: 0;
 	width: 100%;
 	padding:0px;

@@ -1,13 +1,13 @@
 package uc.ac.vo;
 
-public class ProdVO {
+public class ProductVO {
 	private int prodNum;
 	private String prodName;
 	private int prodPrice;
 	private int prodCount;
 	private int project_num_fk;
 
-	public ProdVO(int prodNum, String prodName, int prodPrice, int prodCount, int project_num_fk) {
+	public ProductVO(int prodNum, String prodName, int prodPrice, int prodCount, int project_num_fk) {
 		super();
 		this.prodNum = prodNum;
 		this.prodName = prodName;
@@ -24,7 +24,7 @@ public class ProdVO {
 		this.project_num_fk = project_num_fk;
 	}
 
-	public ProdVO() {
+	public ProductVO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
